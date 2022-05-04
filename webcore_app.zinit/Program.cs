@@ -33,6 +33,61 @@ namespace webcore_app.zinit
                 ctx.PermissionTypes.Add(new PermissionType() { Description = "Enfermedad" });
                 ctx.PermissionTypes.Add(new PermissionType() { Description = "diligencias" });
                 ctx.PermissionTypes.Add(new PermissionType() { Description = "otros" });
+
+                ctx.SaveChanges();
+
+
+                ctx.Permissions.Add(new Permission()
+                {
+                    FirstName = "Dickerson",
+                    LastName = "Macdonald",
+                    PermissionDate = DateTime.Today,
+                    PermissionTypeId = 1
+                });
+
+                ctx.Permissions.Add(new Permission()
+                {
+                    FirstName = "Larsen",
+                    LastName = "Shaw",
+                    PermissionDate = DateTime.Today,
+                    PermissionTypeId = 1
+                });
+
+
+                ctx.Permissions.Add(new Permission()
+                {
+                    FirstName = "Geneva",
+                    LastName = "Wilson",
+                    PermissionDate = DateTime.Today,
+                    PermissionTypeId = 1
+                });
+
+                ctx.Permissions.Add(new Permission()
+                {
+                    FirstName = "Geneva",
+                    LastName = "Carney",
+                    PermissionDate = DateTime.Today,
+                    PermissionTypeId = 2
+                });
+
+
+                ctx.Permissions.Add(new Permission()
+                {
+                    FirstName = "Jami",
+                    LastName = "Carney",
+                    PermissionDate = DateTime.Today,
+                    PermissionTypeId = 3
+                });
+
+
+                ctx.Permissions.Add(new Permission()
+                {
+                    FirstName = "Dickerson",
+                    LastName = "Carney",
+                    PermissionDate = DateTime.Today,
+                    PermissionTypeId = 2
+                });
+
                 ctx.SaveChanges();
             }
         }

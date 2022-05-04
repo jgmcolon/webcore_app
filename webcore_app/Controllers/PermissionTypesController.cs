@@ -46,8 +46,8 @@ namespace webcore_app.Controllers
                                   .OrderBy(x => x.Id)
                                   .Select(x => new 
                                   {
-                                      Id = x.Id,
-                                      Description = x.Description
+                                      value = x.Id,
+                                      text = x.Description
                                   }).ToList()
             };
         }

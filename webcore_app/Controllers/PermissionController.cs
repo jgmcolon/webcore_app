@@ -39,9 +39,9 @@ namespace webcore_app.Controllers
 
 
         [HttpGet("")]
-        public TableResponse GetAll([FromHeader(Name = "page")] int Page,
-                                            [FromHeader(Name = "limit")] int perPage,
-                                            [FromHeader(Name = "search")] string searchText)
+        public TableResponse GetAll([FromHeader(Name = "page")] int Page = 0,
+                                            [FromHeader(Name = "limit")] int perPage = 15,
+                                            [FromHeader(Name = "search")] string searchText = "")
         {
             int skip = Page * perPage;
 
@@ -79,7 +79,16 @@ namespace webcore_app.Controllers
 
             return new ItemResponse
             {
-                Row = row
+                Row = new {
+                    RowId = row.RowId.ToString(),
+                    FirstName = row.FirstName,
+                    LastName = row.LastName,
+                    PermissionType = row.PermissionType.Description,
+                    PermissionTypeId = row.PermissionTypeId,
+                    Id = row.Id,
+                    PermissionDate = row.PermissionDate
+                }
+
             };
         }
 
@@ -114,6 +123,19 @@ namespace webcore_app.Controllers
             row.PermissionDate = value.PermissionDate;
 
             _unitOfWork.Context.Permissions.Update(row);
+            _unitOfWork.Context.SaveChanges();
+
+            return new BaseResponse { Message = "Registro actualizado con exito." };
+        }
+
+        [HttpPost("{id}")]
+        public BaseResponse Delete(string id)
+        {
+            var row = _unitOfWork.Context.Permissions.Where(x => x.RowId.Equals(id.ToGuid())).FirstOrDefault();
+            if (row is null) return new BaseResponse { Error = true, Message = "Registro no encontrado" };
+
+            _unitOfWork.Context.Permissions.Remove(row);
+
             _unitOfWork.Context.SaveChanges();
 
             return new BaseResponse { Message = "Registro actualizado con exito." };
